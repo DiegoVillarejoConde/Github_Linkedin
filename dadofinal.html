@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dado Clásico</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            margin: 0;
+            perspective: 1000px;
+        }
+        .escena {
+            width: 200px;
+            height: 200px;
+            perspective: 600px;
+        }
+        .dado {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+        .cara {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: white;
+            border: 2px solid #333;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .punto {
+            width: 20px;
+             height: 20px;
+            background-color: black;
+            border-radius: 50%;
+            justify-self: center;
+            align-self: center;
+        }
+        .cara1 { transform: rotateY(0deg) translateZ(100px); }
+        .cara2 { transform: rotateY(90deg) translateZ(100px); }
+        .cara3 { transform: rotateY(180deg) translateZ(100px); }
+        .cara4 { transform: rotateY(270deg) translateZ(100px); }
+        .cara5 { transform: rotateX(90deg) translateZ(100px); }
+        .cara6 { transform: rotateX(-90deg) translateZ(100px); }
+    </style>
+</head>
+<body>
+    <div class="escena" onclick="lanzarDado()">
+        <div class="dado" id="dado">
+            <!-- Cara 1 -->
+            <div class="cara cara1">
+                <div></div><div></div><div></div>
+                <div></div><div class="punto"></div><div></div>
+                <div></div><div></div><div></div>
+            </div>
+            <!-- Cara 2 -->
+            <div class="cara cara2">
+                <div class="punto"></div><div></div><div></div>
+                <div></div><div></div><div></div>
+                <div></div><div></div><div class="punto"></div>
+            </div>
+            <!-- Cara 3 -->
+            <div class="cara cara3">
+                <div class="punto"></div><div></div><div></div>
+                <div></div><div class="punto"></div><div></div>
+                <div></div><div></div><div class="punto"></div>
+            </div>
+            <!-- Cara 4 -->
+            <div class="cara cara4">
+                <div class="punto"></div><div></div><div class="punto"></div>
+                <div></div><div></div><div></div>
+                <div class="punto"></div><div></div><div class="punto"></div>
+            </div>
+            <!-- Cara 5 -->
+            <div class="cara cara5">
+                <div class="punto"></div><div></div><div class="punto"></div>
+                <div></div><div class="punto"></div><div></div>
+                <div class="punto"></div><div></div><div class="punto"></div>
+            </div>
+            <!-- Cara 6 -->
+            <div class="cara cara6">
+                <div class="punto"></div><div></div><div class="punto"></div>
+                <div class="punto"></div><div></div><div class="punto"></div>
+                <div class="punto"></div><div></div><div class="punto"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function lanzarDado() {
+            const dado = document.getElementById('dado');
+            const giros = [
+                'rotateX(720deg) rotateY(360deg)',
+                'rotateX(540deg) rotateY(270deg)',
+                'rotateX(360deg) rotateY(180deg)',
+                'rotateX(180deg) rotateY(90deg)',
+                'rotateX(450deg) rotateY(180deg)',
+                'rotateX(810deg) rotateY(360deg)'
+            ];
+            
+            const indiceAleatorio = Math.floor(Math.random() * 6);
+            dado.style.transform = giros[indiceAleatorio];
+        }
+    </script>
+</body>
+</html>

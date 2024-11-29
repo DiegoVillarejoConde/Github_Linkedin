@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lanzador de Dado</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        #resultado {
+            font-size: 100px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="resultado" onclick="lanzarDado()">?</div>
+
+    <script>
+        function lanzarDado() {
+            const resultado = Math.floor(Math.random() * 6) + 1;
+            document.getElementById('resultado').textContent = resultado;
+        }
+    </script>
+</body>
+</html>

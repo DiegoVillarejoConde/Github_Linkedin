@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dado 3D Completo</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            perspective: 1000px;
+        }
+        .dado {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotar 0.5s;
+            cursor: pointer;
+        }
+        .cara {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: white;
+            border: 2px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .cara1 { transform: translateZ(100px); }
+        .cara2 { transform: rotateY(90deg) translateZ(100px); }
+        .cara3 { transform: rotateY(180deg) translateZ(100px); }
+        .cara4 { transform: rotateY(270deg) translateZ(100px); }
+        .cara5 { transform: rotateX(90deg) translateZ(100px); }
+        .cara6 { transform: rotateX(-90deg) translateZ(100px); }
+        @keyframes rotar {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="dado" onclick="lanzarDado()">
+        <div class="cara cara1">1</div>
+        <div class="cara cara2">2</div>
+        <div class="cara cara3">3</div>
+        <div class="cara cara4">4</div>
+        <div class="cara cara5">5</div>
+        <div class="cara cara6">6</div>
+    </div>
+
+    <script>
+        function lanzarDado() {
+            const dado = document.querySelector('.dado');
+            const caras = document.querySelectorAll('.cara');
+            
+            // Ocultar todas las caras
+            caras.forEach(cara => cara.style.opacity = '0');
+            
+            // Animación de lanzamiento
+            dado.style.animation = 'none';
+            void dado.offsetWidth; // Trigger reflow
+            dado.style.animation = 'rotar 0.5s';
+            
+            // Mostrar resultado aleatorio
+            setTimeout(() => {
+                const numero = Math.floor(Math.random() * 6) + 1;
+                caras.forEach(cara => cara.style.opacity = '0');
+                document.querySelector(`.cara${numero}`).style.opacity = '1';
+            }, 500);
+        }
+    </script>
+</body>
+</html>

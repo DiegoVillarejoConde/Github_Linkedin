@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dado 3D</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            perspective: 1000px;
+        }
+        #dado {
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            cursor: pointer;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        #resultado {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateX(0deg);
+            font-size: 100px;
+            color: #2c3e50;
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div id="dado" onclick="lanzarDado()">
+        <div id="resultado">?</div>
+    </div>
+
+    <script>
+        function lanzarDado() {
+            const dado = document.getElementById('dado');
+            const resultado = document.getElementById('resultado');
+            
+            // Animación de rotación
+            dado.style.transform = `rotateX(${Math.random() * 360}deg) rotateY(${Math.random() * 360}deg)`;
+            
+            // Generar número aleatorio
+            setTimeout(() => {
+                const numero = Math.floor(Math.random() * 6) + 1;
+                resultado.textContent = numero;
+                resultado.style.transform = 'translate(-50%, -50%) rotateX(0deg)';
+            }, 500);
+        }
+    </script>
+</body>
+</html>
